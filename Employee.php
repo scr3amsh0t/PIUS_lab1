@@ -13,11 +13,11 @@ class Employee {
         private int $id, 
         private string $name,
         private float $salary,
-        private DateTime $hireDate
+        private DateTime $employmentDate
         ) 
         
         {
-            $this->validate($this->id, $this->name, $this->salary, $this->hireDate);
+            $this->validate($this->id, $this->name, $this->salary, $this->employmentDate);
     }
 
     public function getId():int
@@ -35,16 +35,16 @@ class Employee {
         return $this->salary;
     }
 
-    public function getHireDate(): DateTime
+    public function getEmploymentDate(): DateTime
     {
-        return $this->hireDate;
+        return $this->employmentDate;
     }
 
     public function validate(
         int $id,
         string $name,
         float $salary,
-        DateTime $hireDate,
+        DateTime $employmentDate,
     ) 
     
     {
@@ -54,7 +54,7 @@ class Employee {
                 'id' => $id,
                 'name' => $name,
                 'salary' => $salary,
-                'hireDate' => $hireDate,
+                'employmentDate' => $employmentDate,
             ],
 
             new Assert\Collection(
@@ -63,12 +63,15 @@ class Employee {
                         new Assert\Type(['type' => 'integer']),
                         new Assert\GreaterThan(0),
                     ],
-                    'name' => new Assert\Length(['min' => 2, 'max' => 20]),
+                    'name' => [
+                        new Assert\Type(['type' => 'string']),
+                        new Assert\Length(['min' => 2, 'max' => 20]),
+                    ],
                     'salary' => [
                         new Assert\Type(['type' => 'float']),
                         new Assert\GreaterThan(16242),
                     ],
-                    'hireDate' => new Assert\LessThan(new DateTime()),
+                    'employmentDate' => new Assert\LessThan(new DateTime()),
                 ]
             )
         );
@@ -80,11 +83,11 @@ class Employee {
         }
     }
 
-    public function workYears(): int
-    {
-        $today = new DateTime();
-        $hireDate = new DateTime((string)$this->hireDate);
-        $interval = $today->diff($hireDate);
-        return $interval->y;
+    public function getExp() {
+        $now = new DateTime();
+        $employmentDate = new DateTime();
+        $interval = $now->diff($employmentDate);
+        return $interval-> y;
     }
+
 }
