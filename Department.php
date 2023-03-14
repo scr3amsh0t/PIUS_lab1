@@ -25,12 +25,12 @@ class Department {
         return count ($this->employees);
     }
 
-    public function totalSalary(): float
+    public function getTotalSalary(): float
     {
         $total = 0;
         foreach($this->employees as $employee)
         {
-            $total = $total + $employee->getSalary();
+            $total += $employee->getSalary();
         }
         return $total;
     }
