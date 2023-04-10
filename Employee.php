@@ -20,17 +20,17 @@ class Employee {
             $this->validate($this->id, $this->name, $this->salary, $this->employmentDate);
     }
 
-    public function getId():int
+    public function getId(): int
     {
         return $this->id;
     }
 
-    public function getName():string
+    public function getName(): string
     {
         return $this->name;
     }
 
-    public function getSalary():float
+    public function getSalary(): float
     {
         return $this->salary;
     }
@@ -83,9 +83,10 @@ class Employee {
         }
     }
 
-    public function getExp() {
+    public function getWorkExperience(): int
+    {
         $now = new DateTime();
-        $employmentDate = new DateTime();
+        $employmentDate = new DateTime($this->employmentDate);
         $interval = $now->diff($employmentDate);
         return $interval-> y;
     }
